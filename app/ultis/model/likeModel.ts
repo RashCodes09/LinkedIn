@@ -7,7 +7,7 @@ interface iLikeData extends iLike, Document {}
 const likeSchema = new Schema<iLikeData>(
   {
     post: { type: Types.ObjectId, ref: "posts" },
-    user: { type: Types.ObjectId, ref: "users" },
+    user: { type: Types.ObjectId, ref: "ussers" },
   },
   { timestamps: true }
 );

@@ -13,7 +13,7 @@ const commentSchema = new Schema({
   },
   user: {
     type: Types.ObjectId,
-    ref: "users",
+    ref: "ussers",
   },
   post: {
     type: Types.ObjectId,

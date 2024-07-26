@@ -15,12 +15,6 @@ const Searchcomp = () => {
           <MdPerson className="text-[40px]" />
         </div>
         <div className="w-full">
-          {/* <input
-            // onClick={redirect("/posts")}
-            
-            placeholder="Start a Post"
-            type="text"
-          /> */}
           <DialogCloseButton />
         </div>
       </div>

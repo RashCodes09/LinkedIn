@@ -4,6 +4,7 @@ interface iUser {
   name: string;
   email: string;
   password: string;
+  profession: string;
   avatar: string;
   avatarID: string;
   post: {}[];
@@ -22,6 +23,9 @@ const userSchema = new Schema(
     password: {
       type: String,
     },
+    profession: {
+      type: String,
+    },
     avatar: {
       type: String,
     },
@@ -37,5 +41,5 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
-const userModel = models.users || model<iUserData>("users", userSchema);
+const userModel = models.ussers || model<iUserData>("ussers", userSchema);
 export default userModel;

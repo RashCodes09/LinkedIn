@@ -76,6 +76,8 @@ const Header = () => {
         <p
           className="cursor-pointer p-2 bg-[#0a66c2] text-[12px] rounded-md font-semibold text-white"
           onClick={() => {
+            console.log("clicked");
+
             dispatch(signoutUser());
           }}
         >

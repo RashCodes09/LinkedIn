@@ -13,8 +13,8 @@ const slice = createSlice({
     authUser: (state: { userState: {} | null }, { payload }) => {
       state.userState = payload;
     },
-    signoutUser: (state) => {
-      state.userState = {};
+    signoutUser: (state: { userState: {} | null }) => {
+      state.userState = null;
     },
     addToPost: (state) => {
       state.postTogle = !state.postTogle;

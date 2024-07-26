@@ -14,13 +14,14 @@ const page = () => {
     const email = formData.get("email");
     const name = formData.get("name");
     const password = formData.get("password");
+    const profession = formData.get("profession");
 
     await fetch(url, {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ email, name, password }),
+      body: JSON.stringify({ email, name, password, profession }),
     }).then(() => {
       redirect("/signin");
     });
@@ -54,6 +55,16 @@ const page = () => {
               <input
                 placeholder="Enter your password"
                 name="password"
+                className="border rounded-md outline-none h-[45px] pl-2"
+              />
+            </div>
+            <div className="flex flex-col mt-5 mb-3">
+              <label className="font-semibold text-[12px] mb-1">
+                profession
+              </label>
+              <input
+                placeholder="Enter your profession"
+                name="profession"
                 className="border rounded-md outline-none h-[45px] pl-2"
               />
             </div>

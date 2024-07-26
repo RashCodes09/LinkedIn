@@ -29,7 +29,7 @@ const postSchema = new Schema(
     ],
     user: {
       type: Types.ObjectId,
-      ref: "users",
+      ref: "ussers",
     },
   },
   { timestamps: true }

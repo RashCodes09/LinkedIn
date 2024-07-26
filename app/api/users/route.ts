@@ -25,7 +25,8 @@ export const GET = async () => {
 export const POST = async (req: NextRequest) => {
   try {
     await dbConfig();
-    const { name, email, password, avatar, avatarID, post } = await req.json();
+    const { name, email, password, avatar, avatarID, post, profession } =
+      await req.json();
     const salt = await bcryptjs.genSalt(10);
     const hashed = await bcryptjs.hash(password, salt);
     const user = await userModel.create({
@@ -35,6 +36,7 @@ export const POST = async (req: NextRequest) => {
       avatar,
       avatarID,
       post,
+      profession,
     });
 
     return NextResponse.json({

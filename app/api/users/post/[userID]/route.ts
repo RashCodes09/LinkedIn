@@ -51,3 +51,37 @@ export const POST = async (req: NextRequest, { params }: any) => {
     });
   }
 };
+
+export const PATCH = async (req: NextRequest, { params }: any) => {
+  try {
+    await dbConfig();
+    const { userID } = params;
+    const { name, email, password, avatar, avatarID, post, profession } =
+      await req.json();
+    const user = await userModel.findByIdAndUpdate(
+      userID,
+      {
+        name,
+        email,
+        password,
+        avatar,
+        avatarID,
+        post,
+        profession,
+      },
+      { new: true }
+    );
+
+    return NextResponse.json({
+      message: "user updated",
+      status: 200,
+      data: user,
+    });
+  } catch (error: any) {
+    return NextResponse.json({
+      message: "error upsating",
+      status: 404,
+      error: error.message,
+    });
+  }
+};
