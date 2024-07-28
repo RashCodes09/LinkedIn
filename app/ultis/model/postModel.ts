@@ -1,4 +1,4 @@
-import { Schema, Types, model, models } from "mongoose";
+import { Document, Schema, Types, model, models } from "mongoose";
 import { types } from "util";
 interface iPost {
   content: string;
@@ -6,8 +6,9 @@ interface iPost {
   avatar: string;
   like: [];
   user: {};
+  userID: string;
 }
-interface iPostData extends iPost, Document {}
+export interface iPostData extends iPost, Document {}
 
 const postSchema = new Schema(
   {
@@ -15,6 +16,9 @@ const postSchema = new Schema(
       type: String,
     },
     avatar: {
+      type: String,
+    },
+    userID: {
       type: String,
     },
     like: {
@@ -34,5 +38,5 @@ const postSchema = new Schema(
   },
   { timestamps: true }
 );
-const postModel = models.posts || model<iPostData>("posts", postSchema);
+const postModel = models.possts || model<iPostData>("possts", postSchema);
 export default postModel;

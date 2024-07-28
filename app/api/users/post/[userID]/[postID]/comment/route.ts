@@ -39,7 +39,12 @@ export const GET = async (req: NextRequest, { params }: any) => {
           createAt: -1,
         },
       },
+      populate: {
+        path: "user",
+        model: "ussers",
+      },
     });
+
     return NextResponse.json({
       message: "All Comments",
       status: 200,

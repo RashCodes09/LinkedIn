@@ -17,7 +17,7 @@ const commentSchema = new Schema({
   },
   post: {
     type: Types.ObjectId,
-    ref: "posts",
+    ref: "possts",
   },
 });
 const commentModel =

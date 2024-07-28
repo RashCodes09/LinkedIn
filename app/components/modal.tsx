@@ -1,5 +1,3 @@
-import { CopyIcon } from "@radix-ui/react-icons";
-
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,8 +11,40 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { revalidateTag } from "next/cache";
+// import { revalidateTag } from "next/cache";
 
 export function DialogCloseButton() {
+  const user = useSelector((state: any) => state.userState);
+  // console.log("seeing", user);
+
+  // const [content, setContent] = useState<string>("");
+  // const [image, setImage] = useState<string>("");
+  const data = user?.data?._id ? user?.data : user;
+
+  const makePost = async (formData: FormData) => {
+    const content = formData.get("content");
+    const avatar = formData.get("image");
+    const url = "/api/users/post";
+    await fetch(`${url}/${data?._id}`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        content,
+        avatar,
+      }),
+      next: {
+        tags: ["possts"],
+      },
+    });
+
+    revalidateTag("possts");
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -27,34 +57,42 @@ export function DialogCloseButton() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Share link</DialogTitle>
+          <DialogTitle>Share Your Post</DialogTitle>
           <DialogDescription>
             Anyone who has this link will be able to view this.
           </DialogDescription>
         </DialogHeader>
-        <div className="flex items-center space-x-2">
-          <div className="grid flex-1 gap-2">
-            <Label htmlFor="link" className="sr-only">
-              Link
-            </Label>
-            <Input
-              id="link"
-              defaultValue="https://ui.shadcn.com/docs/installation"
-              readOnly
-            />
+        <form action={makePost}>
+          <div className="flex flex-col gap-3">
+            <div className="grid ">
+              <Label htmlFor="link" className="sr-only">
+                Write Post
+              </Label>
+              <Input
+                id="link"
+                placeholder="write your post here"
+                name="content"
+              />
+            </div>
+            <div className="grid ">
+              <Label htmlFor="link" className="sr-only">
+                Image
+              </Label>
+              <Input
+                id="link"
+                placeholder="pass your image url here"
+                name="image"
+              />
+            </div>
           </div>
-          <Button type="submit" size="sm" className="px-3">
-            <span className="sr-only">Copy</span>
-            <CopyIcon className="h-4 w-4" />
-          </Button>
-        </div>
-        <DialogFooter className="sm:justify-start">
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
-            </Button>
-          </DialogClose>
-        </DialogFooter>
+          <DialogFooter className="sm:justify-start">
+            <DialogClose asChild>
+              <Button type="submit" variant="secondary">
+                Create Post
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );

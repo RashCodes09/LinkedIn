@@ -14,17 +14,21 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { authUser } from "../global/slice";
+import { CameraIcon } from "lucide-react";
+import Image from "next/image";
 
 export function Profilemodal() {
   const user = useSelector((state: any) => state.userState);
 
+  const dispatch = useDispatch();
   const [name, setName] = useState<string>("");
   const [profession, setProfession] = useState<string>("");
   const [avatar, setAvatar] = useState<string>("");
 
   const updateprofile = async () => {
-    const url = "http://localhost:3000/api";
+    const url = "/api/users/post";
     await fetch(`${url}/${user?._id}`, {
       method: "PATCH",
       headers: {
@@ -35,18 +39,32 @@ export function Profilemodal() {
         profession,
         avatar,
       }),
+    }).then(async (res) => {
+      let data = await res.json();
+      // console.log("must show:", data);
+      dispatch(authUser(data));
     });
   };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
+        {/* <Button
           variant="outline"
           className="border hover:bg-gray-100 transition-all duration-300 cursor-pointer outline-none w-full h-[50px] rounded-full px-4 placeholder:font-semibold placeholder:text-[12px] placeholder:text-black placeholder:flex justify-start"
-        >
-          Start Post
-        </Button>
+        > */}
+        {user?.data?.avatar ? (
+          <Image
+            width={1000}
+            height={1000}
+            src={user?.data?.avatar}
+            alt="text"
+            className="rounded-full w-ful h-full object-cover"
+          />
+        ) : (
+          <CameraIcon className="text-[20px] text-blue-600" />
+        )}
+        {/* </Button> */}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
@@ -60,24 +78,46 @@ export function Profilemodal() {
             <Label htmlFor="link" className="sr-only">
               Name
             </Label>
-            <Input id="link" placeholder="Enter your name" />
+            <Input
+              id="link"
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
           <div className="grid ">
             <Label htmlFor="link" className="sr-only">
               profession
             </Label>
-            <Input id="link" placeholder="Enter your profession" />
+            <Input
+              id="link"
+              placeholder="Enter your profession"
+              value={profession}
+              onChange={(e) => setProfession(e.target.value)}
+            />
           </div>
           <div className="grid ">
             <Label htmlFor="link" className="sr-only">
               avatar
             </Label>
-            <Input id="link" placeholder="Enter your avatar" />
+            <Input
+              id="link"
+              placeholder="Enter your avatar"
+              value={avatar}
+              onChange={(e) => setAvatar(e.target.value)}
+            />
           </div>
         </div>
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={
+                updateprofile
+                // console.log("job done!!");
+              }
+            >
               Update Now
             </Button>
           </DialogClose>

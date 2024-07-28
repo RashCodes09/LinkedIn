@@ -1,22 +1,26 @@
 import React from "react";
-import { CameraIcon } from "lucide-react";
 import { Profilemodal } from "./Profilemodal";
+import { useSelector } from "react-redux";
 
 const Leftpart = () => {
+  const user = useSelector((state: any) => state.userState);
+  // console.log("left:", user);
+
+  const data = user?.data ? user?.data : user;
+
   return (
     <div>
       <div className="border pb-4 w-full md:w-full md:h-[370px] bg-white  border-neutral-300 rounded-md">
         <div className="relative">
           <div className="bg-gray-300 h-[80px] "></div>
           <div className="border-2 flex items-center justify-center border-white rounded-full w-[60px] h-[60px] bg-gray-300 top-[50px] md:right-[80px] right-[40%] absolute">
-            <CameraIcon className="text-[20px] text-blue-600" />
             <Profilemodal />
           </div>
         </div>
         <div className="flex justify-center items-center mt-10 md:border-b md:pb-4">
           <div className="flex flex-col items-center justify-center">
             <h1 className="text-[14px] text-neutral-500 font-semibold pb-1">
-              Welcome, Rasheedat
+              Welcome, {data?.name}
             </h1>
             <p className="text-[11px]  text-blue-600 font-light">Add a Photo</p>
           </div>

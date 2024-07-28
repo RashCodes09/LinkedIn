@@ -4,21 +4,16 @@ import userModel from "@/app/ultis/model/userModel";
 import { Types } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (req: NextRequest, { params }: any) => {
+export const GET = async () => {
   try {
-    const { userID } = await params;
-    const getD = await userModel.findById(userID).populate({
-      path: "post",
-      options: {
-        sort: {
-          createAt: -1,
-        },
-      },
-    });
+    await dbConfig();
+
+    const post = await postModel.find();
+
     return NextResponse.json({
       message: "All Posts",
       status: 200,
-      data: getD,
+      data: post,
     });
   } catch (error: any) {
     return NextResponse.json({
@@ -33,9 +28,9 @@ export const POST = async (req: NextRequest, { params }: any) => {
   try {
     await dbConfig();
     const { userID } = await params;
-    const { content, image } = await req.json();
+    const { content, avatar } = await req.json();
     const user = await userModel.findById(userID);
-    const getD = await postModel.create({ content, image, user });
+    const getD = await postModel.create({ content, avatar, userID });
     await user.post.push(new Types.ObjectId(getD._id));
     user.save();
     return NextResponse.json({
