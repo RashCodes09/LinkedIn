@@ -7,7 +7,6 @@ import { FaTwitter } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
 import { toast, useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { authUser } from "@/app/global/slice";

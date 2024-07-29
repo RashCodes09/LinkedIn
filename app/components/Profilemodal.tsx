@@ -1,5 +1,3 @@
-import { CopyIcon } from "@radix-ui/react-icons";
-
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -49,10 +47,6 @@ export function Profilemodal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        {/* <Button
-          variant="outline"
-          className="border hover:bg-gray-100 transition-all duration-300 cursor-pointer outline-none w-full h-[50px] rounded-full px-4 placeholder:font-semibold placeholder:text-[12px] placeholder:text-black placeholder:flex justify-start"
-        > */}
         {user?.data?.avatar ? (
           <Image
             width={1000}

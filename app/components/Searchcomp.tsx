@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import React from "react";
 import { IoMdCalendar } from "react-icons/io";
 import { MdArticle, MdImage, MdPerson } from "react-icons/md";

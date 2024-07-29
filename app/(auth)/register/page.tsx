@@ -4,11 +4,10 @@ import React from "react";
 import { MdFacebook } from "react-icons/md";
 import { FaTwitter } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
-import { POST } from "@/app/api/users/route";
 import { redirect } from "next/navigation";
 
 const page = () => {
-  const url = "http:localhost:3000/api/users";
+  const url = "https://linked-in-five-indol.vercel.app/api/users";
   const mainAction = async (formData: FormData) => {
     "use server";
     const email = formData.get("email");
