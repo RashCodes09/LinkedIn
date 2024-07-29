@@ -20,7 +20,7 @@ const Page = () => {
   const dispatch = useDispatch();
 
   const mainAction = async (formData: FormData) => {
-    const url = "https://linked-in-five-indol.vercel.app/api/signin";
+    const url = "http://linked-in-five-indol.vercel.app/api/signin";
     const email = formData.get("email");
     const password = formData.get("password");
     await fetch(url, {
