@@ -23,7 +23,7 @@ const page = () => {
       },
       body: JSON.stringify({ email, name, password, profession }),
     }).then(() => {
-      redirect("/signin");
+      redirect("/Signin");
     });
   };
   return (
