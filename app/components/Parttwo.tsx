@@ -38,7 +38,7 @@ const Parttwo = () => {
       <Searchcomp />
 
       {posts.map((el: any) => (
-        <Postcomp {...el} />
+        <Postcomp {...el} key={el.id} />
       ))}
     </div>
   );

@@ -135,7 +135,7 @@ const Postcomp: FC<iPostData> = ({ content, avatar, _id: postID }) => {
             )}
             {comment &&
               comment?.map((el: any) => (
-                <div className="grid grid-cols-10 px-5 w-full pb-3">
+                <div className="grid grid-cols-10 px-5 w-full pb-3" key={el.id}>
                   <Image
                     src={el?.user?.avatar}
                     alt="#"
