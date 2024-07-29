@@ -12,7 +12,7 @@ import { redirect } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { authUser } from "@/app/global/slice";
 
-const page = () => {
+const Page = () => {
   const data = useSelector((state: any) => {
     return state.userState;
   });
@@ -98,4 +98,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
