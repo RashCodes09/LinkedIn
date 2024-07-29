@@ -12,7 +12,7 @@ import { redirect } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { authUser } from "@/app/global/slice";
 
-const Page = () => {
+const page = () => {
   const data = useSelector((state: any) => {
     return state.userState;
   });
@@ -52,14 +52,6 @@ const Page = () => {
             This is Sign In
           </p>
           <form action={mainAction}>
-            {/* <div className="flex flex-col mt-5 mb-3">
-              <label className="font-semibold text-[12px] mb-1">Name</label>
-              <input
-                placeholder="Enter your name"
-                name="name"
-                className="border rounded-md outline-none h-[45px] pl-2"
-              />
-            </div> */}
             <div className="flex flex-col mt-5 mb-3">
               <label className="font-semibold text-[12px] mb-1">Email</label>
               <input
@@ -106,4 +98,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default page;
